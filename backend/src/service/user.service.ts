@@ -5,11 +5,8 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 export class UserService {
     private readonly _saltRounds = 12;
     private readonly _jwtSecret = '0.rfyj3n9nzh';
-    static _user: Promise<User | null>;
 
-    constructor() {
-
-    }
+    constructor() {}
 
     async getUsers() {
         try {

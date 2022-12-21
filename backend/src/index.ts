@@ -6,6 +6,7 @@ import "dotenv/config";
 
 import connection from "./config/db.config";
 import { userRouter } from "./routes/user.route";
+import { chartRouter } from "./routes/chart.route";
 import { tokenGuard } from "./middlewares/token-guard";
 
 const app = express();
@@ -17,12 +18,13 @@ app.use(express.urlencoded({
 }));
 app.use(cors());
 
-app.use("/", userRouter);
-
-app.use(tokenGuard());
 app.get("/welcome", (req: Request, res: Response): Response => {
     return res.json({ message: "ACE Digital Service Welcome message." });
 });
+app.use("/", userRouter);
+
+app.use(tokenGuard());
+app.use("/", chartRouter);
 
 const start = async (): Promise<void> => {
     try {

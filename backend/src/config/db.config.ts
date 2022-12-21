@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize-typescript";
 
 import { User } from "../model/user.model";
+import { Chart } from "../model/chart.model";
 
 const hostName = process.env.HOST;
 const userName = process.env.USER;
@@ -15,7 +16,7 @@ const connection = new Sequelize({
   password: password,
   database: database,
   logging: false,
-  models: [User],
+  models: [User, Chart],
 });
 
 export default connection;
