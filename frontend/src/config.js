@@ -1,3 +1,3 @@
 export const apiConfig = {
-  url: "http://192.168.1.140:8001",
+  url: process.REACT_APP_API_ENDPOINT,
 };
