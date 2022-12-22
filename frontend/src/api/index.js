@@ -1,12 +1,12 @@
-import { PinballApi } from "./pinball-api";
+import { Api as ApiItem } from "./api";
 
 const Api = {
-    ...PinballApi,
+  ...ApiItem,
 
-    reducers: {
-        [PinballApi.reducerPath]: PinballApi.reducer,
-    },
-    middlewares: [PinballApi.middleware],
+  reducers: {
+    [ApiItem.reducerPath]: ApiItem.reducer,
+  },
+  middlewares: [ApiItem.middleware],
 };
 
 export default Api;

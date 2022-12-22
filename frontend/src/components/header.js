@@ -1,15 +1,23 @@
 import { Grid, Box, Button, Typography } from "@mui/material";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login, logout } from "store/auth-reducer";
+import { _getAccount } from "store/selectors";
 
 const Header = () => {
-  const [isLogged, setIsLogged] = useState(false);
+  const dispatch = useDispatch();
+
+  const account = _getAccount();
 
   const handleLogin = () => {
-    setIsLogged(true);
+    dispatch(
+      login({
+        name: "John",
+      })
+    );
   };
 
   const handleLogout = () => {
-    setIsLogged(false);
+    dispatch(logout());
   };
 
   return (
@@ -26,7 +34,7 @@ const Header = () => {
         item
         sx={{ width: "fit-content" }}
       >
-        {!isLogged ? (
+        {!account ? (
           <Button
             variant="text"
             color="inherit"
@@ -41,7 +49,7 @@ const Header = () => {
               variant="body2"
               sx={{ px: 1 }}
             >
-              Welcome, XXX
+              Welcome, {account.name}
             </Typography>
             <Button
               variant="text"

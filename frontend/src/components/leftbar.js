@@ -3,10 +3,17 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { LoadingButton } from "@mui/lab";
 import { Typography } from "@material-ui/core";
+import Api from "api";
+import { useDispatch } from "react-redux";
+import { updateChartList } from "store/app-reducer";
 
 const FILTERS = ["January", "February", "March", "April", "May", "June", "July"];
 
 const Leftbar = () => {
+  const dispatch = useDispatch();
+
+  const [getList] = Api.useGetListMutation();
+
   const formik = useFormik({
     initialValues: {
       start: 0,
@@ -21,7 +28,25 @@ const Leftbar = () => {
           return start <= value;
         }),
     }),
-    onSubmit: async (values, helpers) => {},
+    onSubmit: async (values, helpers) => {
+      const payload = {
+        start: values.start,
+        end: values.end,
+      };
+
+      getList(payload)
+        .then((res) => {
+          dispatch(updateChartList(res));
+          helpers.setStatus({ success: true });
+          helpers.setSubmitting(false);
+        })
+        .catch((err) => {
+          dispatch(updateChartList([]));
+          helpers.setStatus({ success: false });
+          helpers.setErrors({ submit: err.message });
+          helpers.setSubmitting(false);
+        });
+    },
   });
   const handleChangeStart = (e) => {
     formik.setFieldValue("start", e.target.value);
