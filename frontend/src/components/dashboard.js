@@ -4,29 +4,34 @@ import { _getChartList } from "store/selectors";
 import ChartCard from "./chart-card";
 import DashboardTable from "./dashboard-table";
 
+const tmpBackColors = [
+  "rgb(255, 99, 132)",
+  "rgb(54, 162, 235)",
+  "rgb(255, 205, 86)",
+  "rgb(255, 99, 132)",
+  "rgb(54, 162, 235)",
+  "rgb(255, 205, 86)",
+  "rgb(255, 99, 132)",
+  "rgb(54, 162, 235)",
+  "rgb(255, 205, 86)",
+];
+
 const tmpCharts = [
   {
     title: "Title 1",
     config: {
       type: "pie",
       data: {
-        labels: ["Red", "Blue", "Yellow"],
+        labels: ["Jan", "Feb", "Mar", "Apr"],
         datasets: [
           {
-            label: "My First Dataset",
-            data: [300, 50, 100],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-            ],
-            hoverOffset: 4,
+            // label: "My First Dataset",
+            // data: [26, 66, 45, 98],
+            backgroundColor: [...tmpBackColors],
+            // hoverOffset: 4,
+            label: "Dataset",
+            data: [300, 50, 100, 300, 50, 100, 200],
+            // backgroundColor: "rgba(255, 99, 132, 0.5)",
           },
         ],
       },
@@ -100,7 +105,7 @@ const Dashboard = () => {
     if (chartList.length > 0) {
       const labels = chartList.map((item) => item.label);
       const data = chartList.map((item) => item.val);
-      const backgroundColor = tmpCharts[0].config.data.datasets[0].backgroundColor.slice(0, data.length);
+      const backgroundColor = tmpBackColors.slice(0, data.length);
 
       charts[0].config.data.labels = [...labels];
       charts[0].config.data.datasets[0].data = [...data];

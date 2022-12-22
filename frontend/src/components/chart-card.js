@@ -1,6 +1,6 @@
 // import { CardContent, CardHeader } from "@material-ui/core";
 import { Card, CardContent, CardHeader } from "@mui/material";
-import { Chart as ChartItem } from "react-chartjs-2";
+import { Chart as ChartItem, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   ArcElement,
@@ -31,6 +31,7 @@ ChartJS.register(
 
 const ChartCard = (props) => {
   const { chart } = props;
+  console.log("chart: ", chart);
 
   return (
     <Card
@@ -51,6 +52,7 @@ const ChartCard = (props) => {
             responsive: true,
             maintainAspectRatio: false,
           }}
+          redraw={true}
         />
       </CardContent>
     </Card>
