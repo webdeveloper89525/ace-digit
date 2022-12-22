@@ -4,9 +4,9 @@
 
 ## Installation
 
-- Make sure node v16.14.2
-- Run `yarn`
+- Make sure node v16+
+- Run `npm insall`
 
 ## Run app
+- `npm run start`
 
-### `yarn start`
