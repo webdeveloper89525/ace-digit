@@ -18,12 +18,14 @@ app.use(express.urlencoded({
 }));
 app.use(cors());
 
+// Unprotected endpoint
 app.get("/welcome", (req: Request, res: Response): Response => {
     return res.json({ message: "ACE Digital Service Welcome message." });
 });
 app.use("/", userRouter);
 app.use("/", chartRouter);
 
+// Protected endpoint
 app.use(tokenGuard());
 
 const start = async (): Promise<void> => {
