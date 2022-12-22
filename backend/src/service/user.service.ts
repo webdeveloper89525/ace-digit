@@ -62,7 +62,13 @@ export class UserService {
             }
         });
 
-        return {hasError: false, token: token, data: plainUser};
+        const userData = {
+            name: plainUser.name,
+            email: plainUser.email,
+            id: plainUser.id
+        }
+
+        return {hasError: false, token: token, data: userData};
     }
 
     async verifyToken(token: string) {
