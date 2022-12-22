@@ -1,3 +1,3 @@
 export const apiConfig = {
-  url: process.REACT_APP_API_ENDPOINT,
+  url: process.env.REACT_APP_API_ENDPOINT,
 };
