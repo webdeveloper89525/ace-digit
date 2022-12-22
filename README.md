@@ -5,6 +5,10 @@ FrontEnd + BackEnd
 ## Requirement
 - Make sure node v16+
 
+## Project configuration
+- Frontend: React, javascript
+- Backend: NodeJS, typescript, postgresql, express, sequelize
+
 
 ## Installation.
 ### Front End.
