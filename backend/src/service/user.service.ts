@@ -62,7 +62,7 @@ export class UserService {
             }
         });
 
-        return {hasError: false, token: token};
+        return {hasError: false, token: token, data: plainUser};
     }
 
     async verifyToken(token: string) {
