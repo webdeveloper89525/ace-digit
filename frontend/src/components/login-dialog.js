@@ -46,11 +46,6 @@ export const LoginDialog = (props) => {
             helpers.setStatus({ success: false });
             helpers.setErrors({ submit: err.message });
             helpers.setSubmitting(false);
-          })
-          .finally(() => {
-            helpers.setStatus({ success: true });
-            helpers.setSubmitting(false);
-            onClose();
           });
       } catch (err) {
         console.error(err);
@@ -116,7 +111,7 @@ export const LoginDialog = (props) => {
           </Grid>
         </DialogContent>
 
-        <DialogActions sx={{ px: 3, pb: 3 }}>
+        <DialogActions sx={{ px: 3 }}>
           <Button
             color="primary"
             onClick={onClose}

@@ -31,7 +31,6 @@ ChartJS.register(
 
 const ChartCard = (props) => {
   const { chart } = props;
-  console.log("chart: ", chart);
 
   return (
     <Card
