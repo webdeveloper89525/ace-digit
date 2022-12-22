@@ -20,5 +20,9 @@ FrontEnd + BackEnd
 ## API
 - http://localhost:8001/
 
+## REST API Endpoint
+Use API endpoint in Postman or other API management tools by using the below file.
+`api-data.json`
+
 ## FrontEnd Url
 - http://localhost:3000/

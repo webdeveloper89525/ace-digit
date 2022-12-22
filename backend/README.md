@@ -13,5 +13,3 @@ FrontEnd + BackEnd
 
 ## API
 - http://localhost:8001/
-
-## REST API

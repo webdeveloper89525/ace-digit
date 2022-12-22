@@ -22,9 +22,9 @@ app.get("/welcome", (req: Request, res: Response): Response => {
     return res.json({ message: "ACE Digital Service Welcome message." });
 });
 app.use("/", userRouter);
+app.use("/", chartRouter);
 
 app.use(tokenGuard());
-app.use("/", chartRouter);
 
 const start = async (): Promise<void> => {
     try {
