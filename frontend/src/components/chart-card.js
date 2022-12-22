@@ -31,6 +31,7 @@ ChartJS.register(
 
 const ChartCard = (props) => {
   const { chart } = props;
+
   return (
     <Card
       variant="outlined"

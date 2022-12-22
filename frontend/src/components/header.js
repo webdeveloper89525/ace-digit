@@ -10,6 +10,7 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const account = _getAccount();
+
   const [login, setLogin] = useState(null);
 
   const handleLogin = () => {

@@ -1,8 +1,10 @@
 import { Box, Grid } from "@mui/material";
+import { useMemo } from "react";
+import { _getChartList } from "store/selectors";
 import ChartCard from "./chart-card";
 import DashboardTable from "./dashboard-table";
 
-const charts = [
+const tmpCharts = [
   {
     title: "Title 1",
     config: {
@@ -13,7 +15,17 @@ const charts = [
           {
             label: "My First Dataset",
             data: [300, 50, 100],
-            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+            ],
             hoverOffset: 4,
           },
         ],
@@ -80,6 +92,30 @@ const charts = [
 ];
 
 const Dashboard = () => {
+  const chartList = _getChartList();
+
+  const charts = useMemo(() => {
+    const charts = [...tmpCharts];
+
+    if (chartList.length > 0) {
+      const labels = chartList.map((item) => item.label);
+      const data = chartList.map((item) => item.val);
+      const backgroundColor = tmpCharts[0].config.data.datasets[0].backgroundColor.slice(0, data.length);
+
+      charts[0].config.data.labels = [...labels];
+      charts[0].config.data.datasets[0].data = [...data];
+      charts[0].config.data.datasets[0].backgroundColor = [...backgroundColor];
+
+      charts[1].config.data.labels = [...labels];
+      charts[1].config.data.datasets[0].data = [...data];
+
+      charts[2].config.data.labels = [...labels];
+      charts[2].config.data.datasets[0].data = [...data];
+    }
+
+    return charts;
+  }, [chartList]);
+
   return (
     <Box sx={{ pt: 3 }}>
       <Grid

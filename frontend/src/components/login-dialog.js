@@ -32,11 +32,14 @@ export const LoginDialog = (props) => {
         updateLogin({ payload })
           .then((res) => {
             if (res.data.hasError) {
-              dispatch(login(res.data.data));
-            } else {
               helpers.setStatus({ success: false });
               helpers.setErrors({ submit: res.data.message });
               helpers.setSubmitting(false);
+            } else {
+              dispatch(login({ ...res.data.data, token: res.data.token }));
+              helpers.setStatus({ success: true });
+              helpers.setSubmitting(false);
+              onClose();
             }
           })
           .catch((err) => {

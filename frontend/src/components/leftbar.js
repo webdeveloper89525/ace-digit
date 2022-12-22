@@ -6,6 +6,7 @@ import { Typography } from "@material-ui/core";
 import Api from "api";
 import { useDispatch } from "react-redux";
 import { updateChartList } from "store/app-reducer";
+import { useEffect } from "react";
 
 const FILTERS = ["January", "February", "March", "April", "May", "June", "July"];
 
@@ -16,8 +17,8 @@ const Leftbar = () => {
 
   const formik = useFormik({
     initialValues: {
-      start: 0,
-      end: 1,
+      start: 1,
+      end: 7,
     },
     validationSchema: Yup.object().shape({
       start: Yup.number().required("Filter is required"),
@@ -29,16 +30,22 @@ const Leftbar = () => {
         }),
     }),
     onSubmit: async (values, helpers) => {
-      const payload = {
+      const params = {
         start: values.start,
         end: values.end,
       };
 
-      getList(payload)
+      getList({ params })
         .then((res) => {
-          dispatch(updateChartList(res));
-          helpers.setStatus({ success: true });
-          helpers.setSubmitting(false);
+          if (res.data.hasError) {
+            helpers.setStatus({ success: false });
+            helpers.setErrors({ submit: res.data.message });
+            helpers.setSubmitting(false);
+          } else {
+            dispatch(updateChartList(res.data.data));
+            helpers.setStatus({ success: true });
+            helpers.setSubmitting(false);
+          }
         })
         .catch((err) => {
           dispatch(updateChartList([]));
@@ -55,6 +62,23 @@ const Leftbar = () => {
   const handleChangeEnd = (e) => {
     formik.setFieldValue("end", e.target.value);
   };
+
+  useEffect(() => {
+    const params = {
+      start: 1,
+      end: 7,
+    };
+    getList({ params })
+      .then((res) => {
+        if (!res.data.hasError) {
+          dispatch(updateChartList(res.data.data));
+        }
+      })
+      .catch((err) => {
+        dispatch(updateChartList([]));
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box sx={{ px: 2, mt: 3 }}>
@@ -75,7 +99,7 @@ const Leftbar = () => {
           {FILTERS.map((ele, idx) => {
             return (
               <MenuItem
-                value={idx}
+                value={idx + 1}
                 key={idx}
               >
                 {ele}
@@ -101,7 +125,7 @@ const Leftbar = () => {
           {FILTERS.map((ele, idx) => {
             return (
               <MenuItem
-                value={idx}
+                value={idx + 1}
                 key={idx}
               >
                 {ele}

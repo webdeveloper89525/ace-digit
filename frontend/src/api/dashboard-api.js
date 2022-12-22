@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiConfig } from "../config";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "./base-api";
 
 // Api
 const tagTypes = {
@@ -8,15 +8,13 @@ const tagTypes = {
 
 export const DashboardApi = createApi({
   reducerPath: "dashboard-api",
-  baseQuery: fetchBaseQuery({
-    baseUrl: apiConfig.url,
-  }),
+  baseQuery: baseQuery,
   tagTypes: [...Object.values(tagTypes)],
   endpoints: (builder) => ({
     // List APIs
     getList: builder.mutation({
       query: ({ params }) => ({
-        url: `/api/v1/locations/closest_by_lat_lon.json`,
+        url: `/chart`,
         method: "GET",
         params: params,
       }),
