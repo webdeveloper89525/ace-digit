@@ -1,12 +1,15 @@
-import { Api as ApiItem } from "./api";
+import { DashboardApi } from "./dashboard-api";
+import { AccountApi } from "./account-api";
 
 const Api = {
-  ...ApiItem,
+  ...DashboardApi,
+  ...AccountApi,
 
   reducers: {
-    [ApiItem.reducerPath]: ApiItem.reducer,
+    [DashboardApi.reducerPath]: DashboardApi.reducer,
+    [AccountApi.reducerPath]: AccountApi.reducer,
   },
-  middlewares: [ApiItem.middleware],
+  middlewares: [DashboardApi.middleware, AccountApi.middleware],
 };
 
 export default Api;

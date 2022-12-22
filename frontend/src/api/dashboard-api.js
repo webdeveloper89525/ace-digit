@@ -6,8 +6,8 @@ const tagTypes = {
   Lists: "Lists",
 };
 
-export const Api = createApi({
-  reducerPath: "api",
+export const DashboardApi = createApi({
+  reducerPath: "dashboard-api",
   baseQuery: fetchBaseQuery({
     baseUrl: apiConfig.url,
   }),
